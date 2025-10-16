@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->String('title');
-            $table->String('description');
+            $table->String('description')->nullable();
             $table->bigInteger('user_id')->unsigned()->index()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->enum('status', ["open","in_progress","done"])->default("open");
             $table->timestamps();
         });
     }
