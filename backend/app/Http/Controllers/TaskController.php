@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -25,6 +26,7 @@ class TaskController extends Controller
         ]);
 
         $task = Task::create($request->all());
+        $task->user_id = Auth::id();
                 return response()->json([
             'message' => 'task created successfully',
             'data' => $task
